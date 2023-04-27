@@ -1,0 +1,91 @@
+﻿@model ProyectoENT.ExaCatalogoProducto
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <h2>Productos</h2>
+    </div>
+    <hr />
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4" style="float:right">
+                <a><input id=" idAgregar" type="submit" value="Nuevo" class="btn btn-success" onclick="" /></a>
+                <div class="col-md-4">
+                    @Html.ActionLink("Actualizar", "GetAll", "ExaCatalogoProducto", htmlAttributes: new { @class = "btn btn-info" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        @using (Html.BeginForm("Form", "ExaCatalogoProducto", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="input-group">
+                <div class="row">
+                    @Html.TextBoxFor(model => model.IdProducto, new { @class = "hidden" })
+                    @Html.ValidationMessageFor(model => model.IdProducto)
+
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.Descripcion, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Descripcion)
+                    </div>
+
+                    <div class="col-md-4">
+                        <button class="btn btn-success" type="submit">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <hr />
+
+    <div class="row">
+        @if (Model.Productos != null)
+        {
+            <table class="table-info  table-bordered table-responsive">
+                <thead>
+                    <tr>
+                        <td class="hidden">IdUsuario</td>
+
+                        <td class="text-center" style="font-weight:bold;">Descripcion</td>
+                        <td class="text-center" style="font-weight:bold;">Usuario</td>
+                        <td class="text-center" style="font-weight:bold;">Fecha Creacion</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ProyectoENT.ExaCatalogoProducto exaCatalogoProducto in Model.Productos)
+                    {
+                        <tr>
+                            <td class="hidden">@exaCatalogoProducto.IdProducto</td>
+                            <td>@exaCatalogoProducto.Descripcion</td>
+                            <td>@exaCatalogoProducto.IdUsuario</td>
+                            <td>@exaCatalogoProducto.FechaCreacion</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="alert alert-danger" role="alert">Ocurrio un error al consultar los registro</div>
+        }
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+
+    <script type="text/javascript">
+        $('#idAgregar').click(function () {
+            $('#input').toggle('slow', function () {
+            });
+        });
+    </script>
+}

@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AAcostaEnitmaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AAcostaEnitma.dbo.Departamento' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="codDepto" />
+            <PropertyRef Name="nombreDpto" />
+            <PropertyRef Name="ciudad" />
+            <PropertyRef Name="director" />
+          </Key>
+          <Property Name="codDepto" Type="int" Nullable="false" />
+          <Property Name="nombreDpto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ciudad" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="director" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="nDIEmp" />
+          </Key>
+          <Property Name="nDIEmp" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombEmp" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="sexEmp" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="fecNac" Type="date" Nullable="false" />
+          <Property Name="fecIncorporacion" Type="date" Nullable="false" />
+          <Property Name="salEmp" Type="int" Nullable="false" />
+          <Property Name="comis" Type="int" Nullable="false" />
+          <Property Name="codSuc" Type="int" Nullable="false" />
+          <Property Name="jefeDI" Type="int" Nullable="false" />
+          <Property Name="cargo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nroDepto" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExaCatalogoProducto">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripción" Type="varchar" MaxLength="256" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="FechaCreacion" Type="datetime" />
+        </EntityType>
+        <Function Name="sp_GetAllCatalogoProd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_InsCatalogoProd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Descripción" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="AAcostaEnitmaModelStoreContainer">
+          <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExaCatalogoProducto" EntityType="Self.ExaCatalogoProducto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departamento" EntityType="Self.Departamento" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Departamento].[codDepto] AS [codDepto], 
+    [Departamento].[nombreDpto] AS [nombreDpto], 
+    [Departamento].[ciudad] AS [ciudad], 
+    [Departamento].[director] AS [director]
+    FROM [dbo].[Departamento] AS [Departamento]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AAcostaEnitmaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="nDIEmp" />
+          </Key>
+          <Property Name="nDIEmp" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombEmp" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sexEmp" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecNac" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fecIncorporacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="salEmp" Type="Int32" Nullable="false" />
+          <Property Name="comis" Type="Int32" Nullable="false" />
+          <Property Name="codSuc" Type="Int32" Nullable="false" />
+          <Property Name="jefeDI" Type="Int32" Nullable="false" />
+          <Property Name="cargo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nroDepto" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExaCatalogoProducto">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripción" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="codDepto" />
+            <PropertyRef Name="nombreDpto" />
+            <PropertyRef Name="ciudad" />
+            <PropertyRef Name="director" />
+          </Key>
+          <Property Name="codDepto" Type="Int32" Nullable="false" />
+          <Property Name="nombreDpto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ciudad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="director" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="AAcostaEnitmaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Empleadoes" EntityType="Self.Empleado" />
+          <EntitySet Name="ExaCatalogoProductoes" EntityType="Self.ExaCatalogoProducto" />
+          <EntitySet Name="Departamentoes" EntityType="Self.Departamento" />
+          <FunctionImport Name="sp_GetAllCatalogoProd" ReturnType="Collection(AAcostaEnitmaModel.sp_GetAllCatalogoProd_Result)" />
+          <FunctionImport Name="sp_InsCatalogoProd">
+            <Parameter Name="Descripción" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="sp_GetAllCatalogoProd_Result">
+          <Property Type="Int32" Name="IdProducto" Nullable="false" />
+          <Property Type="String" Name="Descripción" Nullable="true" MaxLength="256" />
+          <Property Type="Int32" Name="IdUsuario" Nullable="true" />
+          <Property Type="DateTime" Name="FechaCreacion" Nullable="true" Precision="23" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AAcostaEnitmaModelStoreContainer" CdmEntityContainer="AAcostaEnitmaEntities">
+          <EntitySetMapping Name="Empleadoes">
+            <EntityTypeMapping TypeName="AAcostaEnitmaModel.Empleado">
+              <MappingFragment StoreEntitySet="Empleado">
+                <ScalarProperty Name="nDIEmp" ColumnName="nDIEmp" />
+                <ScalarProperty Name="nombEmp" ColumnName="nombEmp" />
+                <ScalarProperty Name="sexEmp" ColumnName="sexEmp" />
+                <ScalarProperty Name="fecNac" ColumnName="fecNac" />
+                <ScalarProperty Name="fecIncorporacion" ColumnName="fecIncorporacion" />
+                <ScalarProperty Name="salEmp" ColumnName="salEmp" />
+                <ScalarProperty Name="comis" ColumnName="comis" />
+                <ScalarProperty Name="codSuc" ColumnName="codSuc" />
+                <ScalarProperty Name="jefeDI" ColumnName="jefeDI" />
+                <ScalarProperty Name="cargo" ColumnName="cargo" />
+                <ScalarProperty Name="nroDepto" ColumnName="nroDepto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExaCatalogoProductoes">
+            <EntityTypeMapping TypeName="AAcostaEnitmaModel.ExaCatalogoProducto">
+              <MappingFragment StoreEntitySet="ExaCatalogoProducto">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Descripción" ColumnName="Descripción" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departamentoes">
+            <EntityTypeMapping TypeName="AAcostaEnitmaModel.Departamento">
+              <MappingFragment StoreEntitySet="Departamento">
+                <ScalarProperty Name="codDepto" ColumnName="codDepto" />
+                <ScalarProperty Name="nombreDpto" ColumnName="nombreDpto" />
+                <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+                <ScalarProperty Name="director" ColumnName="director" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetAllCatalogoProd" FunctionName="AAcostaEnitmaModel.Store.sp_GetAllCatalogoProd">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AAcostaEnitmaModel.sp_GetAllCatalogoProd_Result">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Descripción" ColumnName="Descripción" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_InsCatalogoProd" FunctionName="AAcostaEnitmaModel.Store.sp_InsCatalogoProd" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
